@@ -1,2 +1,29 @@
-nodemodule
-package-lock.json
+# Dependency directories
+node_modules/
+
+# Environment variables file
+.env
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+logs/
+*.log
+
+# Output files
+dist/
+build/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Optional: Ignore npm debug log if present
+npm-debug.log*
+
+# Ignore config files if needed
+config/*.config.js
