@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Palette Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Color Palette Finder</h1>
+    <form id="colorForm">
+        <label for="colorInput">Enter a color name:</label>
+        <input type="text" id="colorInput" name="color" required>
+        <button type="submit">Get Palette</button>
+    </form>
+    <div id="paletteContainer"></div>
+
+    <script>
+        document.getElementById('colorForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const color = document.getElementById('colorInput').value;
+            try {
+                const response = await fetch(`http://localhost:3000/palette/${color}`);
+                const data = await response.json();
+                displayPalette(data.palette);
+            } catch (error) {
+                console.error(error);
+            }
+        });
+
+        function displayPalette(palette) {
+            const paletteContainer = document.getElementById('paletteContainer');
+            paletteContainer.innerHTML = '';
+
+            const heading = document.createElement('h2');
+            heading.textContent = 'Color Palette';
+            paletteContainer.appendChild(heading);
+
+            const ul = document.createElement('ul');
+            palette.forEach(color => {
+                const li = document.createElement('li');
+                li.textContent = color;
+                li.style.backgroundColor = color;
+                ul.appendChild(li);
+            });
+            paletteContainer.appendChild(ul);
+        }
+    </script>
+</body>
+
+</html> 
